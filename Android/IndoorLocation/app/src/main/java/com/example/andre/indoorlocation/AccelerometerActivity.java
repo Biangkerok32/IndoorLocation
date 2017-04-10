@@ -1,6 +1,8 @@
 package com.example.andre.indoorlocation;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,21 +22,19 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
 
     /*DEBUG TAG FOR VELOCITY*/
     private static final String DEBUG_TAG="Velocity";
-
+    private static final int SHAKE_THRESHOLD = 600;
+    TextView txt1 ,txt2,txt3;
+    /*PopUp*/
+    Context cv = this;
     /*accelerometer */
     private VelocityTracker mVelocityTracker = null;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
-
     private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
     private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
     /*detecting sHake movement*/
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 600;
-
-    TextView txt1 ,txt2,txt3;
-
 
     /**
      * Identifying Sensors and Sensor Capabilities
@@ -52,17 +52,19 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
 
 
         if(mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)!=null){
+            Log.d(DEBUG_TAG,"Linear");
             mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); // NO G FORCE
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         }
         else if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
+            Log.d(DEBUG_TAG,"Not Linear");
             mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); // WITH G FORCE
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         }
         else{
-            //TODO: Missing failure case
+            //TODO: Missing failure case for no accelerometer
             //Failure, do nothing for now
             Log.d(DEBUG_TAG, "Sensor dosent exist or is inoperable");
         }
@@ -76,6 +78,10 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
 
     }
 
+    /**
+     * Detects any change on the sensor
+     *@param event
+     */
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -121,8 +127,8 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
                 speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
-                    //TODO:Missing warning message to the user.
-                    //do nothing for now.....
+                    onPause();
+                    AlertShakeMovement();
                 }
                 last_x = x;
                 last_y = y;
@@ -133,21 +139,95 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
             txt1.setText("aX: " + String.valueOf(x));
             txt2.setText("aY: " + String.valueOf(y));
             txt3.setText("aZ: " + String.valueOf(z));
+            //TODO: MISSING DISTANCE FOR NON LINEAR
 
+        }else{
+            x = event.values[0];
+            y = event.values[1];
+            z = event.values[2];
+
+
+            Log.d(DEBUG_TAG, String.valueOf(x));
+            Log.d(DEBUG_TAG, String.valueOf(y));
+            Log.d(DEBUG_TAG, String.valueOf(z));
+
+
+            curTime = System.currentTimeMillis();
+            if ((curTime - lastUpdate) > 100) {
+
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
+
+                speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+
+                if (speed > SHAKE_THRESHOLD) {
+                    onPause();
+                    AlertShakeMovement();
+                }
+                last_x = x;
+                last_y = y;
+                last_z = z;
+
+            }
+
+            txt1.setText("aX: " + String.valueOf(x));
+            txt2.setText("aY: " + String.valueOf(y));
+            txt3.setText("aZ: " + String.valueOf(z));
+            //TODO: MISSING DISTANCE FOR LINEAR
         }
+
     }
 
+
+    /**
+     * Alert message  when Shake Movement it's detected
+     *
+     */
+
+    private void AlertShakeMovement(){
+        new AlertDialog.Builder(cv)
+                .setTitle("Shaking Movement Detected")
+                .setMessage("Are you sure you want to Continue with the application IndoorLocation?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        onResume();
+                        dialog.cancel();
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        onDestroy();
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+
+
+    /**
+     * @param sensor
+     * @param accuracy
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         /*do nothing.....*/
     }
 
+    /**
+     *
+     */
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         Log.i(DEBUG_TAG, "onResume");
     }
 
+    /**
+     *
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -156,4 +236,13 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         Log.i(DEBUG_TAG, "onPause");
     }
 
+
+    /**
+     *
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(DEBUG_TAG, "onDestroy");
+    }
 }
