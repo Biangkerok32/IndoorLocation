@@ -2,6 +2,7 @@ package com.example.andre.indoorlocation;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -22,6 +23,20 @@ public class MainActivity extends Activity  {
         TextView tv1 = (TextView)findViewById(R.id.textView2);
         tv1.setText("Hello, welcome to Indoor Location");
 
+        Thread myThread = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    sleep(3000);
+                    Intent intent = new Intent(getApplicationContext(),AccelerometerActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        myThread.start();
 
     }
 
