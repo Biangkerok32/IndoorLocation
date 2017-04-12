@@ -19,22 +19,31 @@ import android.widget.TextView;
 
 public class AccelerometerActivity extends AppCompatActivity implements SensorEventListener {
 
-
+    //TODO:SWIPE MENU
     /*DEBUG TAG FOR VELOCITY*/
     private static final String DEBUG_TAG="Velocity";
     private static final int SHAKE_THRESHOLD = 600;
-    TextView txt1 ,txt2,txt3;
+
+    TextView txt1 ,txt2,txt3,vx,vy,vz;
+
     /*PopUp*/
     Context cv = this;
+
     /*accelerometer */
     private VelocityTracker mVelocityTracker = null;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
     private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
-    /*detecting sHake movement*/
+    /*detecting Shake movement*/
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
+
+    /*for distance*/
+    static  final float NS2S = 1.0f / 1000000000.0f;
+    float[] last_values=null;
+    float[] velocity = null;
+    float[] position = null;
 
     /**
      * Identifying Sensors and Sensor Capabilities
@@ -64,9 +73,28 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
 
         }
         else{
-            //TODO: Missing failure case for no accelerometer
-            //Failure, do nothing for now
-            Log.d(DEBUG_TAG, "Sensor dosent exist or is inoperable");
+            //Failure
+            new AlertDialog.Builder(cv)
+                    .setTitle("No accelerometer detected")
+                    .setMessage("Are you sure you want to Continue with the application IndoorLocation?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO:maybe send a signal only to use gyroscope
+                            //onResume();
+                            dialog.cancel();
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            onDestroy();
+                            dialog.cancel();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+            Log.d(DEBUG_TAG, "Sensor does not exist or is inoperable");
         }
 
 
@@ -74,7 +102,9 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         txt2 = (TextView) findViewById(R.id.editText3);
         txt3 = (TextView) findViewById(R.id.editText4);
 
-
+        vx = (TextView) findViewById(R.id.textView);
+        vy = (TextView) findViewById(R.id.textView3);
+        vz = (TextView) findViewById(R.id.textView4);
 
     }
 
@@ -141,6 +171,24 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
             txt3.setText("aZ: " + String.valueOf(z));
             //TODO: MISSING DISTANCE FOR NON LINEAR
 
+        if(last_values!=null) {
+            float dt = curTime * NS2S;
+            for(int index = 0; index < 3;++index){
+                velocity[index] += (event.values[index] + last_values[index])/2 * dt;
+                position[index] += velocity[index] * dt;
+            }
+            //debug
+            vx.setText("Vx: " + String.valueOf(velocity[0]));
+            vy.setText("Vy: " + String.valueOf(velocity[1]));
+            vz.setText("Vz: " + String.valueOf(velocity[2]));
+
+        }
+            else{
+            //do nothing for now
+        }
+
+
+
         }else{
             x = event.values[0];
             y = event.values[1];
@@ -190,15 +238,16 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
                 .setMessage("Are you sure you want to Continue with the application IndoorLocation?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        onResume();
                         dialog.cancel();
+                        onResume();
+
 
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        onDestroy();
                         dialog.cancel();
+                        onDestroy();
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)

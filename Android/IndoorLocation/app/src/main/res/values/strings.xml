@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">IndoorLocation</string>
-    <string name="cordX">X:</string>
-    <string name="cordY">Y:</string>
-    <string name="cordZ">Z:</string>
+    <string name="cordX">aX:</string>
+    <string name="cordY">aY:</string>
+    <string name="cordZ">aZ:</string>
+    <string name="VelocityX">Vx:</string>
+    <string name="VelocityY">Vy:</string>
+    <string name="VelocityZ">Vz:</string>
 </resources>

@@ -13,6 +13,8 @@ public class MainActivity extends Activity  {
     /*check the different states of the activity ()*/
     private static final String TAG ="IndoorLocation";
 
+    //TODO:SWIPE MENU ?
+    //TODO:Communication to PI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
