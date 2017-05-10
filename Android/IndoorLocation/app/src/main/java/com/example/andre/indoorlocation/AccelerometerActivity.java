@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 public class AccelerometerActivity extends AppCompatActivity implements SensorEventListener {
 
-    //TODO:SWIPE MENU
+
     /*DEBUG TAG FOR VELOCITY*/
     private static final String DEBUG_TAG="Velocity";
     private static final int SHAKE_THRESHOLD = 600;
 
-    TextView txt1 ,txt2,txt3,vx,vy,vz;
+    TextView txt1 ,txt2,txt3,vx,vy,vz,dist;
 
     /*PopUp*/
     Context cv = this;
@@ -37,6 +37,7 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
     private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
     /*detecting Shake movement*/
     private long lastUpdate = 0;
+    long last_timestamp = 0;
     private float last_x, last_y, last_z;
 
     /*for distance*/
@@ -59,20 +60,20 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         /*Accelerometer */
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-
+/*
         if(mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)!=null){
             Log.d(DEBUG_TAG,"Linear");
             mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); // NO G FORCE
-            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(this, mAccelerometer, 900000000);
 
-        }
-        else if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
+        }*/
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
             Log.d(DEBUG_TAG,"Not Linear");
-            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); // WITH G FORCE
-            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // WITH G FORCE
+            mSensorManager.registerListener(this, mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL );
 
         }
-        else{
+        /*else{
             //Failure
             new AlertDialog.Builder(cv)
                     .setTitle("No accelerometer detected")
@@ -95,7 +96,7 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
                     .show();
 
             Log.d(DEBUG_TAG, "Sensor does not exist or is inoperable");
-        }
+        }*/
 
 
         txt1 = (TextView) findViewById(R.id.editText2);
@@ -105,6 +106,8 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         vx = (TextView) findViewById(R.id.textView);
         vy = (TextView) findViewById(R.id.textView3);
         vz = (TextView) findViewById(R.id.textView4);
+
+        dist = (TextView) findViewById(R.id.textView5);
 
     }
 
@@ -120,112 +123,64 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
 
         long curTime;
 
-        float speed,x,y,z;
+        float speed=0, x, y, z;
 
         final float alpha = (float) 0.8;
 
 
-        if(mySensor.getType()==Sensor.TYPE_ACCELEROMETER) {
+        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
             x = event.values[0];
             y = event.values[1];
             z = event.values[2];
 
+            Log.d(DEBUG_TAG, String.valueOf(x));
+            Log.d(DEBUG_TAG, String.valueOf(y));
+            Log.d(DEBUG_TAG, String.valueOf(z));
 
-            gravity[0] = alpha * gravity[0] + (1-alpha) * x;
-            gravity[1] = alpha * gravity[1] + (1-alpha) * y;
-            gravity[2] = alpha * gravity[2] + (1-alpha) * z;
 
+            //Não preciso disto afinal
+            /*
+            gravity[0] = alpha * gravity[0] + (1 - alpha) * x;
+            gravity[1] = alpha * gravity[1] + (1 - alpha) * y;
+            gravity[2] = alpha * gravity[2] + (1 - alpha) * z;
 
 
             linear_acceleration[0] = x - gravity[0];
             linear_acceleration[1] = y - gravity[1];
             linear_acceleration[2] = z - gravity[2];
+                */
 
-
-            Log.d(DEBUG_TAG, String.valueOf(x));
-            Log.d(DEBUG_TAG, String.valueOf(y));
-            Log.d(DEBUG_TAG, String.valueOf(z));
 
 
             curTime = System.currentTimeMillis();
-            if ((curTime - lastUpdate) > 100) {
+            if ((curTime - lastUpdate) > 1000) {
 
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
 
-                speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                speed = Math.abs(x + y + z- last_x - last_y - last_z) / diffTime * 10000;
+                float dt = curTime * NS2S;
+
+                float dpositon = speed * dt;
+                Log.i("DIST",String.valueOf(dpositon));
 
                 if (speed > SHAKE_THRESHOLD) {
-                    onPause();
-                    AlertShakeMovement();
+                    //onPause();
+                    //AlertShakeMovement();
                 }
                 last_x = x;
                 last_y = y;
                 last_z = z;
-
+                Log.i("SPEED",String.valueOf(speed));
             }
 
-            txt1.setText("aX: " + String.valueOf(x));
-            txt2.setText("aY: " + String.valueOf(y));
-            txt3.setText("aZ: " + String.valueOf(z));
-            //TODO: MISSING DISTANCE FOR NON LINEAR
-
-        if(last_values!=null) {
-            float dt = curTime * NS2S;
-            for(int index = 0; index < 3;++index){
-                velocity[index] += (event.values[index] + last_values[index])/2 * dt;
-                position[index] += velocity[index] * dt;
-            }
-            //debug
-            vx.setText("Vx: " + String.valueOf(velocity[0]));
-            vy.setText("Vy: " + String.valueOf(velocity[1]));
-            vz.setText("Vz: " + String.valueOf(velocity[2]));
+            txt1.setText("aX: " + String.valueOf(linear_acceleration[0]));
+            txt2.setText("aY: " + String.valueOf(linear_acceleration[1]));
+            txt3.setText("aZ: " + String.valueOf(linear_acceleration[2]));
 
         }
-            else{
-            //do nothing for now
-        }
-
-
-
-        }else{
-            x = event.values[0];
-            y = event.values[1];
-            z = event.values[2];
-
-
-            Log.d(DEBUG_TAG, String.valueOf(x));
-            Log.d(DEBUG_TAG, String.valueOf(y));
-            Log.d(DEBUG_TAG, String.valueOf(z));
-
-
-            curTime = System.currentTimeMillis();
-            if ((curTime - lastUpdate) > 100) {
-
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-
-                speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
-
-                if (speed > SHAKE_THRESHOLD) {
-                    onPause();
-                    AlertShakeMovement();
-                }
-                last_x = x;
-                last_y = y;
-                last_z = z;
-
-            }
-
-            txt1.setText("aX: " + String.valueOf(x));
-            txt2.setText("aY: " + String.valueOf(y));
-            txt3.setText("aZ: " + String.valueOf(z));
-            //TODO: MISSING DISTANCE FOR LINEAR
-        }
-
     }
-
 
     /**
      * Alert message  when Shake Movement it's detected

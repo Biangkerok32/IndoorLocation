@@ -6,4 +6,5 @@
     <string name="VelocityX">Vx:</string>
     <string name="VelocityY">Vy:</string>
     <string name="VelocityZ">Vz:</string>
+    <string name="distance">Distance:</string>
 </resources>
