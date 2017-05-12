@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/res/merged/debug/mipmap-xxxhdpi/intro.png",
+        "source": "/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/res/mipmap-xxxhdpi/intro.png"
+    },
+    {
+        "merged": "/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    }
+]

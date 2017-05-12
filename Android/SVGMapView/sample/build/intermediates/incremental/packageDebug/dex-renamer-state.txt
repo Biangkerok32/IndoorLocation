@@ -1,0 +1,7 @@
+#Fri May 12 22:31:04 WEST 2017
+base.0=/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52/classes.dex
+base.1=/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52
+file.0=/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f/classes.dex
