@@ -5,120 +5,43 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="22715909734875"
+    timestamp="29639506678195"
     token="6505464118909243130"
     verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="39" />
+        duration="63" />
     <task
         name="instant-run-dex"
-        duration="410" />
+        duration="418" />
     <task
         name="instant-run-transform"
-        duration="3" />
+        duration="21" />
     <task
         name="verifier"
-        duration="1" />
+        duration="2" />
 
     <artifact
         location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/reload-dex/debug/classes.dex"
         type="RELOAD_DEX" />
 
     <build
-        timestamp="21744805215739"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="29270875183253"
+        verifier="MANIFEST_FILE_CHANGE" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/outputs/apk/sample-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="22387638557959"
-        verifier="COMPATIBLE" >
+        timestamp="29537708789875"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22387638557959/classes.dex"
-            type="RELOAD_DEX" />
+            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+            type="DEX" />
     </build>
     <build
-        timestamp="22404429105380"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22404429105380/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22428343731247"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22428343731247/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22438297305831"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22438297305831/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22538679830600"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22538679830600/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22588664908696"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22588664908696/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22602940832189"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22602940832189/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22610989572537"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22610989572537/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22622024774883"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22622024774883/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22684224794608"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22684224794608/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22696412734844"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22696412734844/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22705717956433"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/builds/debug/22705717956433/classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="22715909734875"
+        timestamp="29639506678195"
         verifier="COMPATIBLE" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/reload-dex/debug/classes.dex"

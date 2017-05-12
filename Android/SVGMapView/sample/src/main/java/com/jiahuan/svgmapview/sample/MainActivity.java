@@ -14,7 +14,7 @@ public class MainActivity extends ActionBarActivity
 
     private ListView mSelectListView;
     private ArrayAdapter<String> mAdapter;
-    private Class[] mClasses = {LocationOverlayActivity.class,SparkActivity.class};
+    private Class[] mClasses = {LocationOverlayActivity.class,SparkActivity.class,SparkStepActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity
         });*/
 
 
-        String [] activityarray = {"Location with beacons","Location with accelerometer"};
+        String [] activityarray = {"Location with beacons","Location with accelerometer","Location with step detector"};
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, activityarray);
         ListView listView = (ListView) findViewById(R.id.main_select_lv);

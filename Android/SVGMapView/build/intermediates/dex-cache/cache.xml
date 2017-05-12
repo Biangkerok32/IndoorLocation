@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="f6ea6d99a5ddbd69edd136fc2adbe0b002f7104f">
+        sha1="0d46e77d6ac49178cc1156d827407cfc2958552d">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f/classes.dex" />
     </item>
     <item

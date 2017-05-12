@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:2:1-27:12
+ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:3:5-44
 		INJECTED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml
@@ -14,7 +14,7 @@ ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/
 		INJECTED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml
 		INJECTED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml
 application
-ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:6:5-25:19
+ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:6:5-27:19
 MERGED from [com.android.support:appcompat-v7:22.0.0] /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:22.0.0] /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:22:5-20
 	android:label
@@ -51,6 +51,10 @@ activity#com.jiahuan.svgmapview.sample.MainActivity
 ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:24:9-59
 	android:name
 		ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:24:19-47
+activity#com.jiahuan.svgmapview.sample.SparkStepActivity
+ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:25:9-64
+	android:name
+		ADDED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml:25:19-52
 uses-sdk
 INJECTED from /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [SVGMapView:library:unspecified] /home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/exploded-aar/SVGMapView/library/unspecified/AndroidManifest.xml:6:5-8:41

@@ -31,6 +31,7 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
 
+
     private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
     private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
 
@@ -55,15 +56,19 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spark);
 
+
+
         mapView = (SVGMapView) findViewById(R.id.spark_mapview);
         mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1-cortado.svg"));
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
+
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
             Log.d(DEBUG_TAG,"Not Linear");
             mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // WITH G FORCE
             mSensorManager.registerListener(this, mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL );
+
         }
 
 
@@ -87,6 +92,7 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
         float speed=0, x, y, z;
 
         final float alpha = (float) 0.8;
+
 
 
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -125,7 +131,7 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
 
                 dpositon = speed * dt;
                 Log.i("DIST",String.valueOf(dpositon));
-
+               // Log.i("DIST","Steps:" + String.valueOf(step.getDistanceRun()));
                 if (speed > SHAKE_THRESHOLD) {
                     //onPause();
                     //AlertShakeMovement();
@@ -151,6 +157,7 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        //stepSensorManager.registerListener(this,stepDetector,SensorManager.SENSOR_DELAY_NORMAL);
         Log.i(DEBUG_TAG, "onResume");
     }
 
@@ -160,6 +167,7 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
         super.onPause();
         /*It's good practice to unregister  the sensor when the application hibernates  */
         mSensorManager.unregisterListener(this);
+        //stepSensorManager.unregisterListener(this);
         Log.i(DEBUG_TAG, "onPause");
     }
 

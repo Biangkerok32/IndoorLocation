@@ -24,6 +24,7 @@
         <activity android:name="com.jiahuan.svgmapview.sample.LocationOverlayActivity" />
         <activity android:name="com.jiahuan.svgmapview.sample.SparkActivity" />
         <activity android:name="com.jiahuan.svgmapview.sample.MainActivity" />
+        <activity android:name="com.jiahuan.svgmapview.sample.SparkStepActivity" />
     </application>
 
 </manifest>
