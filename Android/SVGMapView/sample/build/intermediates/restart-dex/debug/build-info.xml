@@ -5,47 +5,47 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="29639506678195"
+    timestamp="8597776012807"
     token="6505464118909243130"
-    verifier="COMPATIBLE" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="63" />
+        duration="0" />
     <task
         name="instant-run-dex"
-        duration="418" />
+        duration="0" />
     <task
         name="instant-run-transform"
-        duration="21" />
+        duration="0" />
     <task
         name="verifier"
-        duration="2" />
+        duration="0" />
 
     <artifact
-        location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/reload-dex/debug/classes.dex"
-        type="RELOAD_DEX" />
+        location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+        type="DEX" />
 
     <build
-        timestamp="29270875183253"
-        verifier="MANIFEST_FILE_CHANGE" >
+        timestamp="1110518699355"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/outputs/apk/sample-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="29537708789875"
+        timestamp="2449074054025"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
+    </build>
+    <build
+        timestamp="8597776012807"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
             type="DEX" />
-    </build>
-    <build
-        timestamp="29639506678195"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/reload-dex/debug/classes.dex"
-            type="RELOAD_DEX" />
     </build>
 
 </instant-run>
