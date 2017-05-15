@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_action_on_off.png",
+        "source": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/src/main/res/drawable-hdpi/ic_action_on_off.png"
+    },
+    {
+        "merged": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/res/merged/debug/drawable-hdpi/icon.png",
+        "source": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/src/main/res/drawable-hdpi/icon.png"
+    },
+    {
+        "merged": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_launcher.png",
+        "source": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/src/main/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_action_discover.png",
+        "source": "/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/src/main/res/drawable-hdpi/ic_action_discover.png"
+    }
+]

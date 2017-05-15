@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="x86"
+    api-level="25"
+    density="xxhdpi"
+    format="8"
+    plugin-version="2.2.3"
+    timestamp="13755868405217"
+    token="7142818321187716666"
+    verifier="FULL_BUILD_REQUESTED" >
+
+    <task
+        name="javac"
+        duration="539" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="91" />
+    <task
+        name="verifier"
+        duration="4" />
+
+    <artifact
+        location="/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/outputs/apk/app-debug.apk"
+        type="MAIN" />
+
+    <build
+        timestamp="13755868405217"
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/outputs/apk/app-debug.apk"
+            type="MAIN" />
+    </build>
+
+</instant-run>

@@ -8,4 +8,5 @@
         <item>Spark</item>
         <item>CustomOverlay</item>
     </array>
+    <string name="distance">Distance:</string>
 </resources>

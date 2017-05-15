@@ -358,7 +358,7 @@ int id action_menu_presenter 0x7f0d0003
 int id action_mode_bar 0x7f0d002e
 int id action_mode_bar_stub 0x7f0d002d
 int id action_mode_close_button 0x7f0d0020
-int id action_settings 0x7f0d0044
+int id action_settings 0x7f0d0045
 int id activity_chooser_view_content 0x7f0d0021
 int id always 0x7f0d0016
 int id basic_mapview 0x7f0d003f
@@ -409,6 +409,7 @@ int id spark_mapview 0x7f0d0043
 int id split_action_bar 0x7f0d0007
 int id submit_area 0x7f0d003c
 int id tabMode 0x7f0d000b
+int id textView 0x7f0d0044
 int id title 0x7f0d0027
 int id up 0x7f0d0008
 int id useLogo 0x7f0d0012
@@ -469,6 +470,7 @@ int string abc_shareactionprovider_share_with_application 0x7f06000e
 int string abc_toolbar_collapse_description 0x7f06000f
 int string action_settings 0x7f060010
 int string app_name 0x7f060011
+int string distance 0x7f060012
 int style Animation_AppCompat_DropDownUp 0x7f07006a
 int style AppTheme 0x7f07006b
 int style Base_Animation_AppCompat_DropDownUp 0x7f07006c

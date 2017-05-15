@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="59f680aae5c7bb2a7e7556c8e4fda4d3650cdf89">
+        sha1="8f6f2c5800a84abca3b14644d3dc11f4b38dc44a">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/IndoorLocation/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9a142b633f679620c5753cdfce1e5dbad4043357/classes.dex" />
     </item>
     <item
@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="61f056682974949002fd709076707d962661afe4">
+        sha1="94af7e31e65ae21ece137cd02222692a4dd9ce96">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/IndoorLocation/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_75a70c8af194c972f708deda4262cfe4561c2ba0/classes.dex" />
     </item>
     <item

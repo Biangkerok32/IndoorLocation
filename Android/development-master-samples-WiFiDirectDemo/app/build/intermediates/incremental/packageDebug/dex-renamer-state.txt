@@ -1,0 +1,7 @@
+#Sat May 06 16:56:10 WEST 2017
+base.0=/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_e5c9915a26e1dd97a6f73175fe50794062b5f10f
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b2c1107503ec2f63198dbfaef6b667227a7af4bb/classes.dex
+base.1=/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b2c1107503ec2f63198dbfaef6b667227a7af4bb
+file.0=/home/andre/GitProjects/IndoorLocation/Android/development-master-samples-WiFiDirectDemo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_e5c9915a26e1dd97a6f73175fe50794062b5f10f/classes.dex

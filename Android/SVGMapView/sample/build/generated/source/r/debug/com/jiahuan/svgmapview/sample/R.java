@@ -1328,7 +1328,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0d002e;
         public static final int action_mode_bar_stub=0x7f0d002d;
         public static final int action_mode_close_button=0x7f0d0020;
-        public static final int action_settings=0x7f0d0044;
+        public static final int action_settings=0x7f0d0045;
         public static final int activity_chooser_view_content=0x7f0d0021;
         public static final int always=0x7f0d0016;
         public static final int basic_mapview=0x7f0d003f;
@@ -1379,6 +1379,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f0d0007;
         public static final int submit_area=0x7f0d003c;
         public static final int tabMode=0x7f0d000b;
+        public static final int textView=0x7f0d0044;
         public static final int title=0x7f0d0027;
         public static final int up=0x7f0d0008;
         public static final int useLogo=0x7f0d0012;
@@ -1449,6 +1450,7 @@ containing a value of this type.
         public static final int abc_toolbar_collapse_description=0x7f06000f;
         public static final int action_settings=0x7f060010;
         public static final int app_name=0x7f060011;
+        public static final int distance=0x7f060012;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f07006a;

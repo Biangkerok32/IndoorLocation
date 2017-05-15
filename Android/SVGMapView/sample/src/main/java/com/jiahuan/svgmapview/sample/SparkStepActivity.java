@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.jiahuan.svgmapview.SVGMapView;
 import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
@@ -21,6 +22,7 @@ public class SparkStepActivity extends ActionBarActivity implements SensorEventL
     private SensorManager sManager;
     private Sensor stepSensor;
     private long steps = 0;
+    TextView tx;
 
 
     @Override
@@ -32,7 +34,7 @@ public class SparkStepActivity extends ActionBarActivity implements SensorEventL
 
         sManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-
+        tx=(TextView)findViewById(R.id.textView);
 
         if (sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
             Log.d("Step","ta a dar!!!");
@@ -56,8 +58,10 @@ public class SparkStepActivity extends ActionBarActivity implements SensorEventL
 
         if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
             steps++;
+            Log.i("Step",String.valueOf(steps));
+            tx.setText(String.valueOf(getDistanceRun(steps)));
         }
-        Log.i("Step",String.valueOf(steps));
+
     }
 
 

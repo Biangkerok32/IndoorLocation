@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="06073fa2b38e7c2fe642cbd9aff60632d0c52e6c">
+        sha1="d6064b0b0f940751de145dc6e44dc5e504d6cca8">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f/classes.dex" />
     </item>
     <item
@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="99d00483e238e9334068854db316b423947bb90d">
+        sha1="148d25584094a13c2a2e1e2ee2f71bb78c590361">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52/classes.dex" />
     </item>
 
