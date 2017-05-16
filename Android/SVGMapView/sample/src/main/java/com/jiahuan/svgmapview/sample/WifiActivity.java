@@ -21,7 +21,7 @@ public class WifiActivity {
     private String receivedstring;
     private int data = 0;
     private JSONObject json;
-    private boolean isconnected = false;
+    public boolean isconnected;
 
     WifiActivity() {
     }
@@ -38,6 +38,7 @@ public class WifiActivity {
                 try {
 
                     DatagramSocket clientsocket = new DatagramSocket(5005);
+                    Log.d("UDP", String.valueOf(clientsocket.isConnected()));
 
                     byte[] receivedata = new byte[1024];
 
@@ -45,6 +46,7 @@ public class WifiActivity {
 
                         DatagramPacket recv_packet = new DatagramPacket(receivedata, receivedata.length);
                         clientsocket.receive(recv_packet);
+                        isconnected = true;
 
                         receivedstring = new String(recv_packet.getData(), recv_packet.getOffset(), recv_packet.getLength());
                         json = new JSONObject(receivedstring);
@@ -60,9 +62,7 @@ public class WifiActivity {
                         Log.d("UDP", "IPAddress : " + ipaddress.toString());
 
                         Log.d("UDP", "Port : " + Integer.toString(port));
-                        if (clientsocket.isConnected()) {
-                            isconnected = true;
-                        }
+
                     }
 
                 } catch (SocketException e) {
@@ -80,6 +80,7 @@ public class WifiActivity {
             }
 
         }).start();
+        isconnected=false;
 
     }
 

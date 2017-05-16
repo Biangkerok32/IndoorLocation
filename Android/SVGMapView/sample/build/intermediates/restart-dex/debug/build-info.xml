@@ -5,19 +5,19 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="52516496955126"
+    timestamp="57258531613900"
     token="6505464118909243130"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="126" />
+        duration="49" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="22" />
+        duration="13" />
     <task
         name="verifier"
         duration="1" />
@@ -27,14 +27,14 @@
         type="DEX" />
 
     <build
-        timestamp="51944995251884"
+        timestamp="57166071633988"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/outputs/apk/sample-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="52516496955126"
+        timestamp="57258531613900"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
