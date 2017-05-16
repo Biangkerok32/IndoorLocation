@@ -1,7 +1,0 @@
-#Fri May 12 19:01:22 WEST 2017
-base.0=/home/andre/GitProjects/IndoorLocation/Android/IndoorLocation/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9a142b633f679620c5753cdfce1e5dbad4043357
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/home/andre/GitProjects/IndoorLocation/Android/IndoorLocation/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_75a70c8af194c972f708deda4262cfe4561c2ba0/classes.dex
-base.1=/home/andre/GitProjects/IndoorLocation/Android/IndoorLocation/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_75a70c8af194c972f708deda4262cfe4561c2ba0
-file.0=/home/andre/GitProjects/IndoorLocation/Android/IndoorLocation/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9a142b633f679620c5753cdfce1e5dbad4043357/classes.dex

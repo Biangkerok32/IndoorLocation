@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jiahuan.svgmapview.SVGMapView;
 import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
@@ -32,22 +33,29 @@ public class SparkStepActivity extends ActionBarActivity implements SensorEventL
         mapView = (SVGMapView) findViewById(R.id.spark_mapview);
         mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1-cortado.svg"));
 
-        sManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 
         tx=(TextView)findViewById(R.id.textView);
 
-        if (sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
+        if (sManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!=null){
             Log.d("Step","ta a dar!!!");
-            stepSensor = sManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+            stepSensor = sManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
             sManager.registerListener(this, stepSensor,SensorManager.SENSOR_DELAY_NORMAL );
 
+        }else{
+            CharSequence text = "STEP not working!";
+            Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
 
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
-        Sensor sensor = event.sensor;
+        Sensor sensor  = event.sensor;
+        tx.setText(String.valueOf(event.values[0]));
+
+        /*      Sensor sensor = event.sensor;
         float[] values = event.values;
         int value = -1;
 
@@ -55,11 +63,12 @@ public class SparkStepActivity extends ActionBarActivity implements SensorEventL
             value = (int) values[0];
         }
 
+*/
 
-        if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+        if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             steps++;
-            Log.i("Step",String.valueOf(steps));
-            tx.setText(String.valueOf(getDistanceRun(steps)));
+            Log.i("Step",String.valueOf(event.values[0]));
+            //tx.setText(String.valueOf(getDistanceRun(steps)));
         }
 
     }
@@ -89,7 +98,7 @@ public class SparkStepActivity extends ActionBarActivity implements SensorEventL
 
     protected void onResume() {
         super.onResume();
-        sManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        sManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
