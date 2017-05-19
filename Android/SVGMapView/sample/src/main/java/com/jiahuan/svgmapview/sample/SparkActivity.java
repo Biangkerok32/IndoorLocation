@@ -1,5 +1,8 @@
 package com.jiahuan.svgmapview.sample;
 
+import com.jiahuan.svgmapview.SVGMapView;
+import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -10,30 +13,32 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.VelocityTracker;
 import android.widget.TextView;
-
-import com.jiahuan.svgmapview.SVGMapView;
-import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
 
 import java.util.LinkedList;
 
 public class SparkActivity extends ActionBarActivity implements SensorEventListener {
+
     static final float NS2S = 1.0f / 1000000000.0f;
+
     /*DEBUG TAG FOR VELOCITY*/
     private static final String DEBUG_TAG = "Velocity";
     private static final int SHAKE_THRESHOLD = 600;
+
     TextView tx;
+
     PointF init_point;
     PointF final_point;
     LinkedList<PointF> last_points = new LinkedList<>();
+
     float dpositon;
     float dpositon_last = 0;
+
     private SVGMapView mapView;
 
     private long steps = 0;
 
-    private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
+    //private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
     private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
 
     private SensorManager mSensorManager;
@@ -51,7 +56,7 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spark);
 
-        init_point = new PointF(85, 350);
+        init_point = new PointF(85, 350); // Point's of reference
         final_point = new PointF(630, 350);
 
         mapView = (SVGMapView) findViewById(R.id.spark_mapview);
@@ -59,17 +64,19 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
         tx = (TextView) findViewById(R.id.textView);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-
+            /*Get's default sensor, iniciates the desire sensor, then register's a listener*/
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             Log.d(DEBUG_TAG, "Not Linear");
-            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // WITH G FORCE
+            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // WITH No G FORCE
             stepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
             mSensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
 
-        mapView.getController().sparkAtPoint(init_point, 30, Color.RED, 8);
+        mapView.getController().sparkAtPoint(init_point, 30, Color.RED, 8); // starts a new spark point on SVG assuming that we are on the inicial point
         last_points.add(init_point);
+
+
         /*Random random = new Random();
         for (int i = 0; i < 4; i++)
         {
@@ -80,6 +87,10 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
 
     }
 
+    /**
+     *
+     * @param event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         Sensor mySensor = event.sensor;
@@ -142,10 +153,12 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
 
                 // Log.i("DIST","Steps:" + String.valueOf(step.getDistanceRun()));
                 //mapView.getController().sparkAtPoint();
+
                 if (speed > SHAKE_THRESHOLD) {
                     //onPause();
                     //AlertShakeMovement();
                 }
+
                 dpositon_last = dpositon;
                 last_x = x;
                 last_y = y;

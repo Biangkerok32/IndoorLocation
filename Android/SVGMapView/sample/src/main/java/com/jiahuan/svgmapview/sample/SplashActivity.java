@@ -1,15 +1,26 @@
 package com.jiahuan.svgmapview.sample;
 
-/**
- * Created by andre on 12-05-2017.
- */
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+
+/***
+ *
+ * Startup activity for the app
+ * Splash screen
+ *
+ ***/
+
 public class SplashActivity extends Activity {
 
+    /**
+     * Call upon the startup of the app
+     * Thread responsible for calling MainActivity after waiting 3 seconds
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

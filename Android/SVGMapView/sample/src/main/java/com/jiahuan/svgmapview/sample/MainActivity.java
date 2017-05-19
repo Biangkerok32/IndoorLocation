@@ -9,13 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+/***
+ * Activity made to present the user the possible options of indoor location
+ */
 public class MainActivity extends ActionBarActivity
 {
+    private Class[] mClasses = {LocationOverlayActivity.class,SparkActivity.class,SparkStepActivity.class}; //array of activities (modes of traking) to post on a listview
 
-    private ListView mSelectListView;
-    private ArrayAdapter<String> mAdapter;
-    private Class[] mClasses = {LocationOverlayActivity.class,SparkActivity.class,SparkStepActivity.class};
-
+    /**
+     * Called upon criation of MainActivity
+     * Sets layout
+     * Calls initialize method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -41,9 +47,11 @@ public class MainActivity extends ActionBarActivity
         });*/
 
 
-        String [] activityarray = {"Location with beacons","Location with accelerometer","Location with step detector"};
+        String [] activityarray = {"Location with beacons","Location with accelerometer","Location with step detector"}; // array of content to put on the list view
+
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, activityarray);
+
         ListView listView = (ListView) findViewById(R.id.main_select_lv);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -51,7 +59,7 @@ public class MainActivity extends ActionBarActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                startActivity(new Intent(MainActivity.this, mClasses[position]));
+                startActivity(new Intent(MainActivity.this, mClasses[position])); // after selecting calls activity on the correspondent listview
             }
         });
 

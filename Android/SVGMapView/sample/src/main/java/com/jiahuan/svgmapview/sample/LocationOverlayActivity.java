@@ -1,5 +1,12 @@
 package com.jiahuan.svgmapview.sample;
 
+
+import com.jiahuan.svgmapview.SVGMapView;
+import com.jiahuan.svgmapview.SVGMapViewListener;
+import com.jiahuan.svgmapview.overlay.SVGMapLocationOverlay;
+import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
+
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,10 +20,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.jiahuan.svgmapview.SVGMapView;
-import com.jiahuan.svgmapview.SVGMapViewListener;
-import com.jiahuan.svgmapview.overlay.SVGMapLocationOverlay;
-import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
 
 import java.util.Date;
 import java.util.Timer;
@@ -24,35 +27,33 @@ import java.util.TimerTask;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
-
+/**
+ * Activity responsible for showing a SVG map with a beacon(position) based on the comunication with the raspberry pi
+ */
 public class LocationOverlayActivity extends ActionBarActivity implements SensorEventListener {
 
-    private final int ONE_SECOND = 3000;
 
-    private SVGMapView mapView;
+    private SVGMapView mapView; // var: mapView responsible to be the layout for the SVG , class from a SVG parser for android
 
-    private int LIMIT_INICIAL_X = 85;
-    private int LIMIT_FINAL_X = 630;
+    private SVGMapLocationOverlay locationOverlay; // var : for marking the position on mapView
 
-    private SVGMapLocationOverlay locationOverlay;
 
-    private WifiActivity wifi;
+    private final int ONE_SECOND = 1000; // var: determines the time loop (1s) for a Timer Task
+    private final int LIMIT_INICIAL_X = 85; // var : inicial point of the SVG map that is considered to be a path on witch we locate the position
+    private final int LIMIT_FINAL_X = 630; // var : final point of the SVG map that is considered to be a path on witch we locate the position
+
+    private WifiActivity wifi; // var: responsible for the UDP communication
 
     private CharSequence connection_text = "Connected to Rpi";
     private CharSequence off_limits_text = "OFF limits on map calculation";
 
-    private float azimuth = 0;
-    private float NORTH = 0;
-    private float SOUTH = 180;
-    private float EST = 90;
-    private float WEST = 270;
+    private float azimuth = 0; // var: show current orientation
 
-    private Toast toast_off_limits;
-    private Toast toast_connection;
+    private Toast toast_off_limits; // var: show some err msg
+    //private Toast toast_connection;
 
-
-    private SensorManager mSensorManager;
-    private Sensor OrientationSensor;
+    private SensorManager mSensorManager; // var: for getting a instance of the hardware device's ( lets us access the sensor device's)
+    private Sensor OrientationSensor; // var : sensor
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +63,16 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
         mapView = (SVGMapView) findViewById(R.id.location_mapview);
 
         Date data = new Date();
-        wifi = new WifiActivity(data);
+        wifi = new WifiActivity(data); // Criation on the connection on the Creation of the activity
 
-        initSensor();
+        initSensor(); // Iniciation the sensor
 
-        makeToasts();
+        makeToasts(); // Preparation for error msgs
 
+
+        /*
+        Listener while loading of the map
+         */
         mapView.registerMapViewListener(new SVGMapViewListener() {
             @Override
             public void onMapLoadComplete() {
@@ -93,7 +98,11 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
 
         mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1-cortado.svg"));
 
-
+        /***
+         *
+         * Creation of task that will check for updates of Rpi (1s) and mark the current position
+         *
+         *  */
         final Timer timer = new Timer();
         final TimerTask timerTask = new TimerTask() {
             int i = 0;
@@ -102,7 +111,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
             public void run() {
                 //mapView.getOverLays().remove(locationOverlay);
 
-                testpath(calculatedistance(wifi.getData()));
+                calculatepath(calculatedistance(wifi.getData())); // Presented with real distance and calculate to corresponding  map reason
 /*
                 if (wifi.getisConnected()) {
                     Log.d("wifi",String.valueOf(wifi.getisConnected()));
@@ -121,43 +130,59 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
             }
         };
 
-
         timer.schedule(timerTask, 0, ONE_SECOND);
     }
 
+
+    /**
+     * Get's default sensor, iniciates the desire sensor, then register's a listener
+     *
+     */
     private void initSensor() {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         OrientationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         mSensorManager.registerListener(this, OrientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    /**
+     * Making toast for err msg ....
+     */
     private void makeToasts() {
         toast_off_limits = Toast.makeText(this, off_limits_text, LENGTH_SHORT);
-        toast_connection = Toast.makeText(this, connection_text, Toast.LENGTH_LONG);
+        //toast_connection = Toast.makeText(this, connection_text, Toast.LENGTH_LONG);
     }
 
-
-    private void testpath(int i) {
+    /**
+     * Method responsible for showing the marker on the map on our current position
+     * @param i : number of points correspondent on the X-axis
+     */
+    private void calculatepath(int i) {
         Log.i("path", "entrei aqui!");
         Log.i("path", String.valueOf(i));
-        mapView.getOverLays().remove(locationOverlay);
-        //mapView.getOverLays().
-        locationOverlay = new SVGMapLocationOverlay(mapView);
-        locationOverlay.setIndicatorArrowBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.indicator_arrow));
-        locationOverlay.setPosition(new PointF(LIMIT_INICIAL_X + i, 350));
+
+        mapView.getOverLays().remove(locationOverlay); // removes any previous marker
+
+        locationOverlay = new SVGMapLocationOverlay(mapView); // instanciates a new marker
+        locationOverlay.setIndicatorArrowBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.indicator_arrow)); // adding layer type of marker
+        locationOverlay.setPosition(new PointF(LIMIT_INICIAL_X + i, 350)); // setting position
+
         locationOverlay.setIndicatorCircleRotateDegree(180);
         locationOverlay.setMode(SVGMapLocationOverlay.MODE_COMPASS);
-        locationOverlay.setIndicatorArrowRotateDegree(getazimuth());
-        //
-        mapView.getOverLays().add(locationOverlay);
+        locationOverlay.setIndicatorArrowRotateDegree(getazimuth()); // set indication on the correct orientation
+
+        mapView.getOverLays().add(locationOverlay); // add marker to map
 
         mapView.refresh();
+
         //mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1-cortado.svg"));
 
 
     }
 
-
+    /**
+     * Listener that captures any changes measured  by  the sensor's
+     * @param sensorEvent : any event capture by hardware sensor's
+     */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Sensor mySensor = sensorEvent.sensor;
@@ -170,10 +195,14 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-
+        //DO NOTHING
     }
 
-
+    /**
+     * Calculates correspondet position for the Current chosen Map
+     * @param recv: real distance of a pre determined position
+     * @return :  correspondent position for the map
+     */
     private int calculatedistance(int recv) {
         //int real_dist;
         //real_dist=Integer.valueOf(recv);
@@ -187,16 +216,11 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
         }
         return map_dist;
     }
-/*
-    public float getOrientation() {
-        float azi_local = getazimuth();
-        if(azi_local>=NORTH && azi_local<){
 
-        }
-
-        return azi_local;
-    }
-*/
+    /**
+     *
+     * @return : current orientation
+     */
     private float getazimuth(){
         return this.azimuth;
     }
