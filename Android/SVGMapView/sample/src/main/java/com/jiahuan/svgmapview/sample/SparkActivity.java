@@ -88,6 +88,8 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
     }
 
     /**
+     *Listener that captures any changes measured  by  the sensor's
+     * Using accelerometer to get current displacement
      *
      * @param event
      */
@@ -104,9 +106,9 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
 
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
-            x = event.values[0];
-            y = event.values[1];
-            z = event.values[2];
+            x = event.values[0]; // acceleration on X-axis
+            y = event.values[1]; // acceleration on Y-axis
+            z = event.values[2]; // acceleration on Z-axis
 
             Log.d(DEBUG_TAG, String.valueOf(x));
             Log.d(DEBUG_TAG, String.valueOf(y));
@@ -121,24 +123,28 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
             linear_acceleration[2] = z - gravity[2];
 
 */
+            //checks every 1 s
             curTime = System.currentTimeMillis();
             if ((curTime - lastUpdate) > 1000) {
 
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
+
+                /*linear acceleration calculations*/
                 linear_acceleration[0]=(linear_acceleration[0]+x)/diffTime;
                 linear_acceleration[1]=(linear_acceleration[1]+y)/diffTime;
                 linear_acceleration[2]=(linear_acceleration[2]+z)/diffTime;
 
                 float acc = (float) (Math.sqrt(linear_acceleration[0]*linear_acceleration[0] + linear_acceleration[1]*linear_acceleration[1]+linear_acceleration[2]*linear_acceleration[2]));
                 Log.i("acc", String.valueOf((int) acc));
+
+                //calculating vectorial speed
                 speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
                 //
                 float dt = curTime * NS2S;
-                //NS2S;
-                //speed=acc *dt
-                // ;
-                dpositon = speed * (dt / 2);
+
+
+                dpositon = speed * (dt / 2); // calculatin displacement
                 tx.setText(String.valueOf((int) dpositon));
                 Log.i("DIST", String.valueOf((int) dpositon));
 
@@ -146,7 +152,7 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
                     int result = (int) (dpositon - dpositon_last);
                     result = result / 1000;
                     PointF newpoint = calculatePoint(result);
-                    mapView.getController().sparkAtPoint(newpoint, 30, Color.RED, 8);
+                    mapView.getController().sparkAtPoint(newpoint, 30, Color.RED, 8); // adding new point to svg
                     //Log.i("result",String.valueOf(result));
                 }
 
@@ -167,11 +173,18 @@ public class SparkActivity extends ActionBarActivity implements SensorEventListe
             }
 
         } else if (mySensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+                /*hardware dosent support this type of sensor*/
             steps++;
             Log.d("Step", String.valueOf(event.values[0]));
         }
     }
 
+
+    /**
+     * Calculates new point on the map according to the displacement calculated using the accelerometer
+     * @param result : displacement
+     * @return : new point to be added to map
+     */
     private PointF calculatePoint(int result) {
         //PointF newpoint;
         //corversion for SVG

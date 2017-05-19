@@ -13,9 +13,8 @@ import java.net.SocketException;
 import java.util.Date;
 
 /**
- * Created by andre on 16-05-2017.
+ * Class responsible for UPD communication with Rpi
  */
-
 public class WifiActivity {
 
     private String receivedstring;
