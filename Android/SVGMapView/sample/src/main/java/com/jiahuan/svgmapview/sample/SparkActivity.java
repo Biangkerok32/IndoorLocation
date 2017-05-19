@@ -1,9 +1,7 @@
 package com.jiahuan.svgmapview.sample;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,57 +16,43 @@ import android.widget.TextView;
 import com.jiahuan.svgmapview.SVGMapView;
 import com.jiahuan.svgmapview.sample.helper.AssetsHelper;
 
-import java.util.Calendar;
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.concurrent.RecursiveTask;
 
-public class SparkActivity extends ActionBarActivity  implements SensorEventListener
-{
-    private SVGMapView mapView;
-    TextView tx;
-    PointF init_point ;
-    PointF final_point;
-
-    LinkedList<PointF> last_points = new LinkedList<>();
-
-
+public class SparkActivity extends ActionBarActivity implements SensorEventListener {
+    static final float NS2S = 1.0f / 1000000000.0f;
     /*DEBUG TAG FOR VELOCITY*/
-    private static final String DEBUG_TAG="Velocity";
+    private static final String DEBUG_TAG = "Velocity";
     private static final int SHAKE_THRESHOLD = 600;
+    TextView tx;
+    PointF init_point;
+    PointF final_point;
+    LinkedList<PointF> last_points = new LinkedList<>();
+    float dpositon;
+    float dpositon_last = 0;
+    private SVGMapView mapView;
 
-    private VelocityTracker mVelocityTracker = null;
+    private long steps = 0;
+
+    private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
+    private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
 
     private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
 
-
-    //private float[] gravity = {(float) 9.8,(float) 9.8,(float) 9.8};
-    //private float [] linear_acceleration={(float) 0.000,(float) 0.000,(float) 0.000};
-
-    /*detecting Shake movement*/
-    private long lastUpdate = 0;
-
-    private float last_x, last_y, last_z;
+    private Sensor stepSensor;
 
     /*for distance*/
-
-    static  final float NS2S = 1.0f / 1000000000.0f;
-
-
-    float dpositon;
-    float dpositon_last=0;
-
-
+    private Sensor mAccelerometer;
+    /*detecting Shake movement*/
+    private long lastUpdate = 0;
+    private float last_x, last_y, last_z;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spark);
 
-        init_point= new PointF(85,350);
-        final_point=new PointF(630,350);
+        init_point = new PointF(85, 350);
+        final_point = new PointF(630, 350);
 
         mapView = (SVGMapView) findViewById(R.id.spark_mapview);
         mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1-cortado.svg"));
@@ -76,14 +60,15 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
-            Log.d(DEBUG_TAG,"Not Linear");
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+            Log.d(DEBUG_TAG, "Not Linear");
             mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // WITH G FORCE
-            mSensorManager.registerListener(this, mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL );
-
+            stepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
 
-        mapView.getController().sparkAtPoint(init_point,30,Color.RED,8);
+        mapView.getController().sparkAtPoint(init_point, 30, Color.RED, 8);
         last_points.add(init_point);
         /*Random random = new Random();
         for (int i = 0; i < 4; i++)
@@ -101,10 +86,9 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
 
         long curTime;
 
-        float speed=0, x, y, z;
+        float speed = 0, x, y, z;
 
         final float alpha = (float) 0.8;
-
 
 
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -117,73 +101,77 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
             Log.d(DEBUG_TAG, String.valueOf(y));
             Log.d(DEBUG_TAG, String.valueOf(z));
 
-            /*
+        /*
             gravity[0] = alpha * gravity[0] + (1 - alpha) * x;
             gravity[1] = alpha * gravity[1] + (1 - alpha) * y;
             gravity[2] = alpha * gravity[2] + (1 - alpha) * z;
             linear_acceleration[0] = x - gravity[0];
             linear_acceleration[1] = y - gravity[1];
             linear_acceleration[2] = z - gravity[2];
-             */
 
+*/
             curTime = System.currentTimeMillis();
             if ((curTime - lastUpdate) > 1000) {
 
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
+                linear_acceleration[0]=(linear_acceleration[0]+x)/diffTime;
+                linear_acceleration[1]=(linear_acceleration[1]+y)/diffTime;
+                linear_acceleration[2]=(linear_acceleration[2]+z)/diffTime;
 
-                //float acc = (float) (Math.sqrt(x*x + y*y+z*z) / diffTime* 10000);
-
-                speed = Math.abs(x + y + z- last_x - last_y - last_z) / diffTime* 10000;
-                    //
-                float dt = curTime*NS2S;
-                        //NS2S;
+                float acc = (float) (Math.sqrt(linear_acceleration[0]*linear_acceleration[0] + linear_acceleration[1]*linear_acceleration[1]+linear_acceleration[2]*linear_acceleration[2]));
+                Log.i("acc", String.valueOf((int) acc));
+                speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                //
+                float dt = curTime * NS2S;
+                //NS2S;
                 //speed=acc *dt
                 // ;
-                dpositon = speed * (dt/2);
+                dpositon = speed * (dt / 2);
                 tx.setText(String.valueOf((int) dpositon));
-                Log.i("DIST",String.valueOf((int)dpositon));
+                Log.i("DIST", String.valueOf((int) dpositon));
 
-                if((dpositon-dpositon_last)>0){
-                    int result=(int) (dpositon-dpositon_last);
-                    result=result/1000;
+                if ((dpositon - dpositon_last) > 0) {
+                    int result = (int) (dpositon - dpositon_last);
+                    result = result / 1000;
                     PointF newpoint = calculatePoint(result);
-                    mapView.getController().sparkAtPoint(newpoint,30,Color.RED,8);
+                    mapView.getController().sparkAtPoint(newpoint, 30, Color.RED, 8);
                     //Log.i("result",String.valueOf(result));
                 }
 
 
-               // Log.i("DIST","Steps:" + String.valueOf(step.getDistanceRun()));
+                // Log.i("DIST","Steps:" + String.valueOf(step.getDistanceRun()));
                 //mapView.getController().sparkAtPoint();
                 if (speed > SHAKE_THRESHOLD) {
                     //onPause();
                     //AlertShakeMovement();
                 }
-                dpositon_last=dpositon;
+                dpositon_last = dpositon;
                 last_x = x;
                 last_y = y;
                 last_z = z;
-                Log.i("SPEED",String.valueOf( speed));
+                Log.i("SPEED", String.valueOf(speed));
             }
 
+        } else if (mySensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            steps++;
+            Log.d("Step", String.valueOf(event.values[0]));
         }
     }
 
     private PointF calculatePoint(int result) {
         //PointF newpoint;
         //corversion for SVG
-        int x= (545*result)/100;
-        Log.i("result",String.valueOf(x));
-        if(x+last_points.getLast().x<init_point.x){
-            return  init_point;
-        } else if(x+last_points.getLast().x>final_point.x){
+        int x = (545 * result) / 100;
+        Log.i("result", String.valueOf(x));
+        if (x + last_points.getLast().x < init_point.x) {
+            return init_point;
+        } else if (x + last_points.getLast().x > final_point.x) {
             return final_point;
+        } else {
+            x = (int) (x + last_points.getLast().x);
+            last_points.add(new PointF(x, last_points.getLast().y));
         }
-        else{
-            x= (int) (x+last_points.getLast().x);
-            last_points.add(new PointF(x,last_points.getLast().y));
-        }
-
 
 
         //newpoint=new PointF(last_points.getLast().x,init_point.y);
@@ -215,6 +203,21 @@ public class SparkActivity extends ActionBarActivity  implements SensorEventList
     protected void onDestroy() {
         super.onDestroy();
         Log.i(DEBUG_TAG, "onDestroy");
+    }
+
+    /**
+     * here are many ways to determine step length: you can measure it yourself,
+     * estimate by multiplying your height in centimeters by 0.415 for men and 0.413 for women
+     * or if you’re not overly concerned with accuracy you can use the averages 78cm for men and 70cm for women.
+     *
+     * @param steps
+     * @return
+     */
+
+    //function to determine the distance run in kilometers using average step length for men and number of steps
+    public float getDistanceRun(long steps) {
+        float distance = (float) (steps * 78) / (float) 100000;
+        return distance;
     }
 }
 
