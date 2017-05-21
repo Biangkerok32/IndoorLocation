@@ -43,6 +43,8 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
     private final int LIMIT_FINAL_X = 630; // var : final point of the SVG map that is considered to be a path on witch we locate the position
 
     private WifiActivity wifi; // var: responsible for the UDP communication
+    private Old_wifi old_wifi;
+
 
     private CharSequence connection_text = "Connected to Rpi";
     private CharSequence off_limits_text = "OFF limits on map calculation";
@@ -64,7 +66,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
 
         Date data = new Date();
         wifi = new WifiActivity(data); // Criation on the connection on the Creation of the activity
-
+        old_wifi=new Old_wifi(data);
         initSensor(); // Iniciation the sensor
 
         makeToasts(); // Preparation for error msgs
@@ -76,9 +78,9 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
         mapView.registerMapViewListener(new SVGMapViewListener() {
             @Override
             public void onMapLoadComplete() {
-              /*  locationOverlay = new SVGMapLocationOverlay(mapView);
+               /*locationOverlay = new SVGMapLocationOverlay(mapView);
                 locationOverlay.setIndicatorArrowBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.indicator_arrow));
-                locationOverlay.setPosition(new PointF(LIMIT_INICIAL_X, 350));
+                locationOverlay.setPosition(new PointF(295, 270));
                 locationOverlay.setIndicatorCircleRotateDegree(180);
                 locationOverlay.setMode(SVGMapLocationOverlay.MODE_COMPASS);
                 locationOverlay.setIndicatorArrowRotateDegree(0);
@@ -96,7 +98,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
             }
         });
 
-        mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1-cortado.svg"));
+        mapView.loadMap(AssetsHelper.getContent(this, "dcc-piso1.svg"));
 
         /***
          *
@@ -111,8 +113,10 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
             public void run() {
                 //mapView.getOverLays().remove(locationOverlay);
 
-                calculatepath(calculatedistance(wifi.getData())); // Presented with real distance and calculate to corresponding  map reason
-/*
+               // calculatepath(calculatedistance(wifi.getData())); // Presented with real distance and calculate to corresponding  map reason
+                //calculatecorredor(old_wifi.getdata());
+
+                /*
                 if (wifi.getisConnected()) {
                     Log.d("wifi",String.valueOf(wifi.getisConnected()));
                     toast_connection.show();
@@ -131,6 +135,55 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
         };
 
         timer.schedule(timerTask, 0, ONE_SECOND);
+    }
+
+    private void calculatecorredor(String getdata) {
+        if(getdata.equals("1")){
+            mapView.getOverLays().remove(locationOverlay); // removes any previous marker
+
+            locationOverlay = new SVGMapLocationOverlay(mapView); // instanciates a new marker
+            locationOverlay.setIndicatorArrowBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.indicator_arrow)); // adding layer type of marker
+            locationOverlay.setPosition(new PointF(120, 370)); // setting position
+
+            locationOverlay.setIndicatorCircleRotateDegree(180);
+            locationOverlay.setMode(SVGMapLocationOverlay.MODE_COMPASS);
+            locationOverlay.setIndicatorArrowRotateDegree(getazimuth()); // set indication on the correct orientation
+
+            mapView.getOverLays().add(locationOverlay); // add marker to map
+
+            mapView.refresh();
+        }
+        if(getdata.equals("2")){
+            mapView.getOverLays().remove(locationOverlay); // removes any previous marker
+
+            locationOverlay = new SVGMapLocationOverlay(mapView); // instanciates a new marker
+            locationOverlay.setIndicatorArrowBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.indicator_arrow)); // adding layer type of marker
+            locationOverlay.setPosition(new PointF(420, 370)); // setting position
+
+            locationOverlay.setIndicatorCircleRotateDegree(180);
+            locationOverlay.setMode(SVGMapLocationOverlay.MODE_COMPASS);
+            locationOverlay.setIndicatorArrowRotateDegree(getazimuth()); // set indication on the correct orientation
+
+            mapView.getOverLays().add(locationOverlay); // add marker to map
+
+            mapView.refresh();
+        }
+        if(getdata.equals("3")){
+            mapView.getOverLays().remove(locationOverlay); // removes any previous marker
+
+            locationOverlay = new SVGMapLocationOverlay(mapView); // instanciates a new marker
+            locationOverlay.setIndicatorArrowBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.indicator_arrow)); // adding layer type of marker
+            locationOverlay.setPosition(new PointF(295, 270)); // setting position
+
+            locationOverlay.setIndicatorCircleRotateDegree(180);
+            locationOverlay.setMode(SVGMapLocationOverlay.MODE_COMPASS);
+            locationOverlay.setIndicatorArrowRotateDegree(getazimuth()); // set indication on the correct orientation
+
+            mapView.getOverLays().add(locationOverlay); // add marker to map
+
+            mapView.refresh();
+        }
+
     }
 
 

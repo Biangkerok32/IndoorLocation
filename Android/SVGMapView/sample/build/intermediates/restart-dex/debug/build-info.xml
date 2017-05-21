@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="23"
+    abi="x86"
+    api-level="25"
     density="xxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="13856070166985"
+    timestamp="16623892054473"
     token="6505464118909243130"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="METHOD_DELETED" >
 
     <task
         name="javac"
-        duration="263" />
+        duration="58" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="31" />
+        duration="20" />
     <task
         name="verifier"
         duration="1" />
 
     <artifact
-        location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/outputs/apk/sample-debug.apk"
-        type="MAIN" />
+        location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+        type="DEX" />
 
     <build
-        timestamp="13856070166985"
+        timestamp="15518687862446"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/outputs/apk/sample-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="16623892054473"
+        verifier="METHOD_DELETED" >
+        <artifact
+            location="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>

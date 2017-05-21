@@ -30,6 +30,42 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="24a8bb0ea79dcad0b70a9aa6d796df6f998a6742">
+        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.0.0_67310cc7e3836305431f2f7968486a1dc2322111/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="3b907f33986233837ae65670a5d7faba2f130512">
+        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="117ae08bdb1cf399fd077ef9f7c14243483d1c14">
+        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="true"
         optimize="true"
@@ -48,15 +84,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="117ae08bdb1cf399fd077ef9f7c14243483d1c14">
-        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -70,7 +97,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="3b907f33986233837ae65670a5d7faba2f130512">
+        sha1="e4e6e1228a60f11edd1fd20f98741151a41f5cfe">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f/classes.dex" />
     </item>
     <item
@@ -81,33 +108,6 @@
         revision="25.0.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
         <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.0.0_67310cc7e3836305431f2f7968486a1dc2322111/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/andre/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.0.0_67310cc7e3836305431f2f7968486a1dc2322111/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="22.0.1"
-        sha1="3b907f33986233837ae65670a5d7faba2f130512">
-        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_247cfd5b441945b7db48d1ac45be852e7107f60f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="22.0.1"
-        sha1="117ae08bdb1cf399fd077ef9f7c14243483d1c14">
-        <dex dex="/home/andre/GitProjects/IndoorLocation/Android/SVGMapView/sample/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_adbc2c50cdf9c226d6ffe6ce8853c63f03c08f52/classes.dex" />
     </item>
 
 </items>
