@@ -114,7 +114,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
                 //mapView.getOverLays().remove(locationOverlay);
 
                // calculatepath(calculatedistance(wifi.getData())); // Presented with real distance and calculate to corresponding  map reason
-                //calculatecorredor(old_wifi.getdata());
+                calculatecorredor(old_wifi.getdata());
 
                 /*
                 if (wifi.getisConnected()) {
