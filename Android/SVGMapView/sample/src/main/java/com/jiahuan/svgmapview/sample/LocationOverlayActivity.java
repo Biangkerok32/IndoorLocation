@@ -43,7 +43,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
     private final int LIMIT_FINAL_X = 630; // var : final point of the SVG map that is considered to be a path on witch we locate the position
 
     private WifiActivity wifi; // var: responsible for the UDP communication
-    private Old_wifi old_wifi;
+    private Oldwifi old_wifi;
 
 
     private CharSequence connection_text = "Connected to Rpi";
@@ -66,7 +66,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
 
         Date data = new Date();
         wifi = new WifiActivity(data); // Criation on the connection on the Creation of the activity
-        old_wifi=new Old_wifi(data);
+        old_wifi=new Oldwifi(data);
         initSensor(); // Iniciation the sensor
 
         makeToasts(); // Preparation for error msgs
@@ -134,7 +134,7 @@ public class LocationOverlayActivity extends ActionBarActivity implements Sensor
             }
         };
 
-        timer.schedule(timerTask, 0, ONE_SECOND);
+        timer.schedule(timerTask, 0, 2000);
     }
 
     private void calculatecorredor(String getdata) {

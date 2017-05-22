@@ -13,16 +13,16 @@ import java.util.Date;
  * Created by andre on 21-05-2017.
  */
 
-public class Old_wifi {
+public class Oldwifi {
 
 
     public  String receivedstring;
 
-    Old_wifi() {
+    Oldwifi() {
 
     }
 
-    Old_wifi(Date date){init();}
+    Oldwifi(Date date){init();}
 
     private void init() {
         new Thread(new Runnable() {
